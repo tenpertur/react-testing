@@ -7,9 +7,11 @@ module.exports = {
         path: path.join(__dirname, '/dist'),
         filename: 'index.bundle.js'
     },
+    devtool: "eval-source-map",
     // webpack 5 comes with devServer which loads in development mode
     devServer: {
         port: 3000,
+        hot: true,
     },
     // Rules of how webpack will take our files, complie & bundle them for the browser
     module: {
@@ -20,6 +22,10 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'
                 }
+            },
+            {
+                test: /\.(s(a|c)ss)$/,
+                use: ['style-loader','css-loader', 'sass-loader']
             },
             {
                 test: /\.css$/,
