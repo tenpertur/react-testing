@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --mode development",
+    "start": "webpack serve --open  --mode development",
     "build": "webpack --mode production"
   },
   "browserslist": [
@@ -14,11 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^5.1.1",
+    "dayjs": "^1.10.7",
     "purecss-sass": "^2.0.6",
-    "react": "^17.0.2",
-    "react-bootstrap": "^2.0.0-rc.0",
-    "react-dom": "^17.0.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "rxjs": "^7.3.0"
   },
   "jest": {

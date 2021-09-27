@@ -2,18 +2,23 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractorPlugin = require('mini-css-extract-plugin')
 module.exports = {
-    // Where files should be sent once they are bundled
+    mode: 'development',
+    entry: path.join(__dirname, "src", "index.jsx"),
     output: {
         path: path.join(__dirname, '/dist'),
         filename: 'index.bundle.js'
     },
     devtool: "eval-source-map",
-    // webpack 5 comes with devServer which loads in development mode
     devServer: {
         port: 3000,
-        hot: true,
+        hot: true
     },
-    // Rules of how webpack will take our files, complie & bundle them for the browser
+    resolve: {
+        alias: {
+            Components: path.resolve(__dirname, 'src/components/'),
+        },
+        extensions: ['.jsx', '.js']
+    },
     module: {
         rules: [
             {
@@ -25,13 +30,19 @@ module.exports = {
             },
             {
                 test: /\.(s(a|c)ss)$/,
-                use: ['style-loader','css-loader', 'sass-loader']
+                use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.css$/,
                 use: [MiniCssExtractorPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.(png|jp(e*)g|svg|gif)$/,
+                use: ['file-loader']
             }
         ]
     },
-    plugins: [new HtmlWebpackPlugin({template: './src/index.html'}), new MiniCssExtractorPlugin()],
+    plugins: [new HtmlWebpackPlugin({
+        template: path.join(__dirname, "src", "index.html"),
+    }), new MiniCssExtractorPlugin()],
 }
