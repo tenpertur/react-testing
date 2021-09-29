@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --open  --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test": "jest --watchAll=false"
   },
   "browserslist": [
     "defaults"
@@ -19,19 +20,22 @@
     "purecss-sass": "^2.0.6",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-test-renderer": "^17.0.2",
     "rxjs": "^7.3.0"
   },
   "jest": {
+    "testEnvironment":"jsdom",
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+      "\\.(css|less|sass|scss)$": "<rootDir>/src/__mocks__/styleMock.js",
+      "Components/(.*)": "<rootDir>/src/components/$1"
     }
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
     "@babel/preset-react": "^7.14.5",
-    "babel-jest": "^27.2.2",
+    "babel-jest": "^27.2.3",
     "babel-loader": "^8.2.2",
     "browserlist": "^1.0.1",
     "css-loader": "^6.3.0",

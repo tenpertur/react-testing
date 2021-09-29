@@ -7,7 +7,6 @@ export const DurationSelector = ({onDurationChange}) => {
 
     useEffect(()=>{
         const durationStr = `${duration.value}${duration.type}`;
-        console.log(durationStr)
         onDurationChange(durationStr)
     },[duration])
 
@@ -15,13 +14,13 @@ export const DurationSelector = ({onDurationChange}) => {
         <div>
             <span className="block">Duration</span>
             <span>
-                <input className="duration" id="duration-input"
+                <input className="duration" id="duration-input-value"
                        value={duration.value}
                        onChange={(evt) => setDuration({...duration, value: evt.target.value})}
                 />
             </span>
             <span>
-                <select name="duration" id="duration-type"
+                <select name="duration" id="duration-select-type"
                         value={duration.type}
                         onChange={(evt) => setDuration({...duration, type: evt.target.value})}
                 >

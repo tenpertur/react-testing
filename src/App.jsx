@@ -1,11 +1,11 @@
 import React from "react"
-import {Layout} from "Components/layout/Layout";
+import {MaturityDateCalculator} from "Components/layout/MaturityDateCalculator";
 
 
 export const App = () => {
     return (
         <div>
-            <Layout/>
+            <MaturityDateCalculator/>
         </div>
     )
 }

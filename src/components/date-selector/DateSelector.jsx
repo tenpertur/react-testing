@@ -12,6 +12,7 @@ export const DateSelector = ({onDateChange}) => {
     return (<div>
             <span className="block">Contractual tenor</span>
             <span className="block"><input
+                id="contractual-tenort-input"
                 type="date"
                 value={selectedDate}
                 onChange={evt => {
