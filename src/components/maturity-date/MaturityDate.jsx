@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './MaturityDate.sass'
 import {Skeleton} from "Components/skeleton/Skeleton";
-import axios from "axios";
 
 export const useMaturityDate = () => {
     const [startDate, setStartDate] = useState()
