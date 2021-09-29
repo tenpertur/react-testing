@@ -1,5 +1,5 @@
+import "@babel/polyfill";
 import React from "react"
-import {unmountComponentAtNode} from "react-dom";
 import {MaturityDateCalculator} from "Components/layout/MaturityDateCalculator";
 import * as ReactDOM from "react-dom";
 import {act, Simulate} from "react-dom/test-utils";
@@ -21,12 +21,13 @@ describe("MaturityDateCalculator tests", () => {
         jest.resetAllMocks()
     })
 
-    it("calls API", () => {
+    it("calls API", async () => {
+        const promise = Promise.resolve({
+            text: () => Promise.resolve("2021-11-25"),
+            status: 200
+        })
         act(() => {
-            mockFetch.mockImplementation(() => Promise.resolve({
-                text: () => Promise.resolve("2021-11-25"),
-                status: 200
-            }))
+            mockFetch.mockImplementation(() => promise)
             ReactDOM.render(
                 <MaturityDateCalculator/>,
                 container
@@ -35,13 +36,15 @@ describe("MaturityDateCalculator tests", () => {
         const tenorTypeSelect = document.querySelector("[id=duration-select-type]")
         expect(tenorTypeSelect).toBeDefined();
         expect(mockFetch).toHaveBeenCalledTimes(1)
+        await act(() => promise)
     })
-    it("calls API after changing duration type", () => {
+    it("calls API after changing duration type", async () => {
+        const promise = Promise.resolve({
+            text: () => Promise.resolve("2021-11-25"),
+            status: 200
+        })
         act(() => {
-            mockFetch.mockImplementation(() => Promise.resolve({
-                text: () => Promise.resolve("2021-11-25"),
-                status: 200
-            }))
+            mockFetch.mockImplementation(() => promise)
             ReactDOM.render(
                 <MaturityDateCalculator/>,
                 container
@@ -56,13 +59,15 @@ describe("MaturityDateCalculator tests", () => {
             Simulate.change(tenorTypeSelect)
         })
         expect(mockFetch).toHaveBeenCalledTimes(2)
+        await act(() => promise)
     })
-    it("calls API after changing duration value", () => {
+    it("calls API after changing duration value", async () => {
+        const promise = Promise.resolve({
+            text: () => Promise.resolve("2021-11-25"),
+            status: 200
+        })
         act(() => {
-            mockFetch.mockImplementation(() => Promise.resolve({
-                text: () => Promise.resolve("2021-11-25"),
-                status: 200
-            }))
+            mockFetch.mockImplementation(() => promise)
             ReactDOM.render(
                 <MaturityDateCalculator/>,
                 container
@@ -78,5 +83,6 @@ describe("MaturityDateCalculator tests", () => {
             Simulate.keyDown(tenorInputValue, {key: "Enter", keyCode: 13, which: 13});
         })
         expect(mockFetch).toHaveBeenCalledTimes(2)
+        await act(() => promise)
     })
 })
