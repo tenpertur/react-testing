@@ -2,12 +2,13 @@ import React, {useEffect, useState} from "react";
 import "./DurationSelector.css"
 
 export const DurationSelector = ({onDurationChange}) => {
-    const [duration, setDuration] = useState({value: 0, type:'d'})
+    const [duration, setDuration] = useState({value: 1, type:'d'})
 
 
     useEffect(()=>{
-        onDurationChange(duration)
-        console.log(JSON.stringify(duration))
+        const durationStr = `${duration.value}${duration.type}`;
+        console.log(durationStr)
+        onDurationChange(durationStr)
     },[duration])
 
     return (

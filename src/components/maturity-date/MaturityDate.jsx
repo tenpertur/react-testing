@@ -1,19 +1,46 @@
-import React from "react";
-import {DurationSelector} from "Components/duration-selector/DurationSelector";
-import {DateSelector} from "Components/date-selector/DateSelector";
-import './MaturityDate.css'
-export const MaturityDate = () => {
-    const [startDate, setStartDate] = React.useState()
-    const [duration, setDuration] = React.useState()
-    const [maturityDate, setMaturityDate] = React.useState()
-    return (
-        <>
-            <div className="maturity-date">
-                <DateSelector onDateChange={tenor=>{setStartDate(tenor)}}/>
-                <DurationSelector onDurationChange={d=>setDuration(d)} />
-                <p className="maturity-date" id="maturity-date-value">{JSON.stringify(duration)}</p>
-            </div>
+import React, {useEffect, useState} from "react";
+import './MaturityDate.sass'
+import {Skeleton} from "Components/skeleton/Skeleton";
+import axios from "axios";
 
-        </>
-    )
+export const useMaturityDate = () => {
+    const [startDate, setStartDate] = useState()
+    const [duration, setDuration] = useState()
+    const [maturityDate, setMaturityDate] = useState()
+    const [isLoading, setIsLoading] = useState(false)
+    const [isError, setIsError] = useState(false)
+    useEffect(() => {
+        if (!startDate || !duration) {
+            return;
+        }
+        setIsLoading(true)
+        fetch(`http://localhost:8080/date?duration=${duration}&from=${startDate}`)
+            .then(resp => {
+                const error = resp.status !== 200
+                setIsError(error)
+                setIsLoading(false)
+                return resp.text()
+            }).then(text => {
+            setMaturityDate(text)
+        })
+            .catch(_ => {
+                setIsError(true)
+                setIsLoading(false)
+            })
+    }, [startDate, duration])
+    return [maturityDate, isLoading, isError, setStartDate, setDuration]
+}
+
+export const MaturityDate = ({maturityDate, isLoading, isError}) => {
+    let element
+    if (isError) {
+        element = <p className="maturity-date-value error">Error during calculation</p>
+    } else if (isLoading) {
+        element = <Skeleton height={"1em"} width={"14em"}/>
+    } else {
+        element = <p className="maturity-date-value">Maturity date: {maturityDate}</p>
+    }
+    return <div className="maturity-date">
+        {element}
+    </div>
 }
