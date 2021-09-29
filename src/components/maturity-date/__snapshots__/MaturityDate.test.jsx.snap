@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MaturityDate tests renders correctly maturity date 1`] = `
+<div
+  className="maturity-date"
+>
+  <p
+    className="maturity-date-value"
+  >
+    Maturity date: 
+    2021-10-11
+  </p>
+</div>
+`;
+
+exports[`MaturityDate tests renders error when error 1`] = `
+<div
+  className="maturity-date"
+>
+  <p
+    className="maturity-date-value error"
+  >
+    Error during calculation
+  </p>
+</div>
+`;
+
+exports[`MaturityDate tests renders maturity date skeleton when loading 1`] = `
+<div
+  className="maturity-date"
+>
+  <div
+    className="skeleton shine"
+    style={
+      Object {
+        "height": "1em",
+        "width": "14em",
+      }
+    }
+  />
+</div>
+`;

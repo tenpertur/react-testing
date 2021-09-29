@@ -1,22 +1,31 @@
 import React, {useEffect, useState} from "react";
-import "./DurationSelector.css"
+import "./DurationSelector.sass"
 
+export const isDurationValid = (d) => !isNaN(d)
 export const DurationSelector = ({onDurationChange}) => {
-    const [duration, setDuration] = useState({value: 1, type:'d'})
+    const [duration, setDuration] = useState({value: 1, type: 'd'})
+    const [isValid, setIsValid] = useState(isDurationValid(duration?.value))
 
+    useEffect(() => {
+        if (isValid) {
+            const durationStr = `${duration.value}${duration.type}`;
+            onDurationChange(durationStr)
+        }
+    }, [duration])
 
-    useEffect(()=>{
-        const durationStr = `${duration.value}${duration.type}`;
-        onDurationChange(durationStr)
-    },[duration])
-
+    const className = "duration " + (isValid ? "" : "error")
     return (
         <div>
             <span className="block">Duration</span>
             <span>
-                <input className="duration" id="duration-input-value"
+                <input className={className} id="duration-input-value"
                        value={duration.value}
-                       onChange={(evt) => setDuration({...duration, value: evt.target.value})}
+                       onChange={(evt) => {
+                           const d = evt.target.value
+                           const valid = isDurationValid(d)
+                           setIsValid(valid)
+                           setDuration({...duration, value: d})
+                       }}
                 />
             </span>
             <span>
