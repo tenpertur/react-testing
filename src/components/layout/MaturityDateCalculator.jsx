@@ -4,7 +4,7 @@ import {DateSelector} from "Components/date-selector/DateSelector";
 import {DurationSelector} from "Components/duration-selector/DurationSelector";
 
 export const MaturityDateCalculator = () => {
-    const [ maturityDate,isLoading, isError,setStartDate, setDuration ] = useMaturityDate();
+    const [maturityDate, isLoading, isError, setStartDate, setDuration] = useMaturityDate();
 
     return (
         <>

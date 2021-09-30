@@ -5,9 +5,9 @@ import "./DateSelector.css"
 export const DateSelector = ({onDateChange}) => {
     const [selectedDate, handleDateChange] = useState(dayjs(new Date()).format("YYYY-MM-DD"));
 
-    useEffect(()=>{
+    useEffect(() => {
         onDateChange(selectedDate)
-    },[])
+    }, [])
 
     return (<div>
             <span className="block">Contractual tenor</span>

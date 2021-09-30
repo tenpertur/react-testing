@@ -35,7 +35,7 @@ describe("MaturityDateCalculator tests", () => {
         })
         const tenorTypeSelect = document.querySelector("[id=duration-select-type]")
         expect(tenorTypeSelect).toBeDefined();
-        expect(mockFetch).toHaveBeenCalledTimes(1)
+        expect(mockFetch).toHaveBeenCalledTimes(2)
         await act(() => promise)
     })
     it("calls API after changing duration type", async () => {
@@ -58,7 +58,7 @@ describe("MaturityDateCalculator tests", () => {
             tenorTypeSelect.options[3].selected = true
             Simulate.change(tenorTypeSelect)
         })
-        expect(mockFetch).toHaveBeenCalledTimes(2)
+        expect(mockFetch).toHaveBeenCalledTimes(5)
         await act(() => promise)
     })
     it("calls API after changing duration value", async () => {
